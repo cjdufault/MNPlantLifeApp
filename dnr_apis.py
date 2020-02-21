@@ -77,5 +77,3 @@ class SNA:
     def set_notes(self, new_notes): self.notes = remove_html_tags(new_notes)
     def set_tags(self, new_tags): self.tags = new_tags
     def set_directions(self, new_directions): self.directions = remove_html_tags(new_directions)
-
-

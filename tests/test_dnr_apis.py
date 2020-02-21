@@ -24,4 +24,4 @@ for i in range(len(sna_search)):
 all_snas = dnr.sna_list()
 
 for i in range(len(all_snas)):
-    print(str(i) + " " + all_snas[i]["name"])
+    print(str(i) + " " + all_snas[i]["id"] + " " + all_snas[i]["name"])

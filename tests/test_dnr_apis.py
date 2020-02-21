@@ -1,24 +1,27 @@
 import dnr_apis as dnr
 
-results = dnr.sna_search("hastings")
-for sna in results:
-    dnr.sna_details(sna)
+sna_search = dnr.search("hastings")
 
-for i in range(len(results)):
+for i in range(len(sna_search)):
     print(i)
-    print(results[i].get_id())
-    print(results[i].get_name())
-    print(results[i].get_county())
-    print(results[i].get_coordinates_box())
-    print(results[i].get_notes())
-    print(results[i].get_tags())
-    print(results[i].get_desc())
-    print(results[i].get_directions())
+    print(sna_search[i].get_id())
+    print(sna_search[i].get_name())
+    print(sna_search[i].get_county())
+    print(sna_search[i].get_coordinates_box())
+    print(sna_search[i].get_notes())
+    print(sna_search[i].get_tags())
+    print(sna_search[i].get_desc())
+    print(sna_search[i].get_directions())
 
-    for item in results[i].get_trees_shrubs():
+    for item in sna_search[i].get_trees_shrubs():
         print(item)
-    for item in results[i].get_grasses():
+    for item in sna_search[i].get_grasses():
         print(item)
-    for item in results[i].get_wildflowers():
+    for item in sna_search[i].get_wildflowers():
         print(item)
     print()
+
+all_snas = dnr.sna_list()
+
+for i in range(len(all_snas)):
+    print(str(i) + " " + all_snas[i]["name"])

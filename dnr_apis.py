@@ -6,21 +6,37 @@ sna_detail_url = "http://services.dnr.state.mn.us/api/sna/detail/v1?id="
 
 
 # searches the dnr gazetteer api for an sna matching an inputted string
-def sna_search(search_string):
-    response = requests.get(gazetteer_url + search_string).json()
+def search(search_string):
+    results = gazetteer_request(search_string)
 
+    list_of_snas = []
+    for result in results:
+        sna = sna_details_request(SNA(result))
+        list_of_snas.append(sna)
+
+    return list_of_snas
+
+
+# returns a list of all of the SNAs
+def sna_list():
+    results = gazetteer_request("")
+
+    list_of_snas = []
+    for result in results:
+        list_of_snas.append({"id": result["id"], "name": result["name"]})
+
+    return list_of_snas
+
+
+def gazetteer_request(search_string):
+    response = requests.get(gazetteer_url + search_string).json()
     if response["status"] == "OK":
         results = response["results"]
-
-        search_results = []    # list of the SNA objects created from the response
-        for result in results:
-            search_results.append(SNA(result))
-
-        return search_results
+        return results
 
 
 # fills an SNA object in w/ all of the deets
-def sna_details(sna):
+def sna_details_request(sna):
     response = requests.get(sna_detail_url + sna.get_id()).json()
 
     if response["status"] == "SUCCESS":  # because apparently consistency is for chumps
@@ -33,6 +49,8 @@ def sna_details(sna):
         sna.set_notes(result["notes"])
         sna.set_tags(result["tags"])
         sna.set_directions(result["parking"][0]["directions"])
+
+        return sna
 
 
 # some strings from the api have html tags in them. this removes them

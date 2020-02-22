@@ -23,7 +23,7 @@ def sna_list():
 
     list_of_snas = []
     for result in results:
-        list_of_snas.append({"id": str.lower(result["id"]), "name": result["name"]})
+        list_of_snas.append(SNA(result))
 
     return list_of_snas
 

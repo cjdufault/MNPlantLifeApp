@@ -11,19 +11,7 @@ def search(search_string):
 
     list_of_snas = []
     for result in results:
-        sna = sna_details_request(SNA(result))
-        list_of_snas.append(sna)
-
-    return list_of_snas
-
-
-# returns a list of all of the SNAs
-def sna_list():
-    results = gazetteer_request("")
-
-    list_of_snas = []
-    for result in results:
-        list_of_snas.append(SNA(result))
+        list_of_snas.append(result)
 
     return list_of_snas
 

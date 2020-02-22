@@ -1,5 +1,6 @@
 from flask import Flask
 import dnr_apis as dnr
+import trefle_api as trefle
 
 app = Flask(__name__)
 

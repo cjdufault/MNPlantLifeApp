@@ -10,8 +10,12 @@ def search(search_string):
     results = gazetteer_request(search_string)
 
     list_of_snas = []
-    for result in results:
-        list_of_snas.append(result)
+    try:
+        for result in results:
+            list_of_snas.append(result)
+
+    except TypeError:
+        print("No results found")
 
     return list_of_snas
 

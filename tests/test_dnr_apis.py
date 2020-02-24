@@ -3,6 +3,8 @@ import dnr_apis as dnr
 sna_search = dnr.search("hastings")
 
 for i in range(len(sna_search)):
+    dnr.sna_details_request(sna_search[i])
+
     print(i)
     print(sna_search[i].get_id())
     print(sna_search[i].get_name())
@@ -24,4 +26,4 @@ for i in range(len(sna_search)):
 all_snas = dnr.search("")
 
 for i in range(len(all_snas)):
-    print(str(i) + " " + all_snas[i]["id"] + " " + all_snas[i]["name"])
+    print(str(i) + " " + all_snas[i].get_id() + " " + all_snas[i].get_name())

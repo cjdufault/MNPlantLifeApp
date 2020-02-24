@@ -12,10 +12,10 @@ def search(search_string):
     list_of_snas = []
     try:
         for result in results:
-            list_of_snas.append(result)
+            list_of_snas.append(SNA(result))
 
     except TypeError:
-        print("No results found")
+        print("No results found for " + search_string)
 
     return list_of_snas
 
@@ -51,11 +51,11 @@ def remove_html_tags(string):
 
 
 class SNA:
-    def __init__(self, result):  # result is a json from the gazetteer api
-        self.id = str.lower(result["id"])  # gazetteer returns this w/ SNA in caps, but details api wants it lower case
-        self.coordinates_box = result["bbox"]["epsg:4326"]
-        self.county = result["county"]
-        self.name = result["name"]
+    def __init__(self, request_result):  # result is a json from the gazetteer api
+        self.id = str.lower(request_result["id"])  # gazetteer has this w/ SNA in caps, but details wants it lower case
+        self.coordinates_box = request_result["bbox"]["epsg:4326"]
+        self.county = request_result["county"]
+        self.name = request_result["name"]
         self.trees_shrubs = []
         self.grasses = []
         self.wildflowers = []

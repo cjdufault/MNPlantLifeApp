@@ -12,7 +12,7 @@ def search(sci_name):
         plant = Plant(result)
         return plant
     except IndexError:
-        print("No result found for " + sci_name)
+        print("No result found for " + sci_name)    # TODO: pass this to the UI in some way
 
 
 def species_request(sci_name):
@@ -32,7 +32,7 @@ def species_details_request(plant):
 
     if response.status_code == 200:
         result = response.json()
-        return result
+        return result   # TODO: map this result to attributes of the Plant class
 
 
 class Plant:

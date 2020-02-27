@@ -12,9 +12,9 @@ def home():
 
 @app.route('/', methods=["POST"])
 def sna_search():
-    search = request.form["search"]
-    print(search)
-    return render_template("search_result.html", search_term=search)
+    search_term = request.form["search"]
+    results = dnr.search(search_term)
+    return render_template("search_result.html", search=search_term, results=results)
 
 
 if __name__ == '__main__':

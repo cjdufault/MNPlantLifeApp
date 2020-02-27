@@ -34,13 +34,13 @@ def sna_details_request(sna):
     if response["status"] == "SUCCESS":  # because apparently consistency is for chumps
         result = response["result"]
 
-        sna.set_trees_shrubs(result["species"]["tree_shrub"])
-        sna.set_grasses(result["species"]["grass_sedge"])
-        sna.set_wildflowers(result["species"]["wildflower"])
-        sna.set_desc(result["description"])
-        sna.set_notes(result["notes"])
-        sna.set_tags(result["tags"])
-        sna.set_directions(result["parking"][0]["directions"])
+        sna.trees_shrubs = result["species"]["tree_shrub"]
+        sna.grasses = result["species"]["grass_sedge"]
+        sna.wildflowers = result["species"]["wildflower"]
+        sna.desc = remove_html_tags(result["description"])
+        sna.notes = remove_html_tags(result["notes"])
+        sna.tags = result["tags"]
+        sna.directions = remove_html_tags(result["parking"][0]["directions"])
 
         return sna
 
@@ -63,27 +63,3 @@ class SNA:
         self.notes = ""
         self.tags = []
         self.directions = ""
-
-    def get_id(self): return self.id
-    def get_coordinates_box(self): return self.coordinates_box
-    def get_county(self): return self.county
-    def get_name(self): return self.name
-    def get_trees_shrubs(self): return self.trees_shrubs
-    def get_grasses(self): return self.grasses
-    def get_wildflowers(self): return self.wildflowers
-    def get_desc(self): return self.desc
-    def get_notes(self): return self.notes
-    def get_tags(self): return self.tags
-    def get_directions(self): return self.directions
-
-    def set_id(self, new_id): self.id = new_id
-    def set_coordinates_box(self, new_coordinates_box): self.coordinates_box = new_coordinates_box
-    def set_county(self, new_county): self.county = new_county
-    def set_name(self, new_name): self.name = new_name
-    def set_trees_shrubs(self, new_trees_shrubs): self.trees_shrubs = new_trees_shrubs
-    def set_grasses(self, new_grasses): self.grasses = new_grasses
-    def set_wildflowers(self, new_wildflowers): self.wildflowers = new_wildflowers
-    def set_desc(self, new_desc): self.desc = remove_html_tags(new_desc)
-    def set_notes(self, new_notes): self.notes = remove_html_tags(new_notes)
-    def set_tags(self, new_tags): self.tags = new_tags
-    def set_directions(self, new_directions): self.directions = remove_html_tags(new_directions)

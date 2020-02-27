@@ -33,8 +33,6 @@ def species_details_request(plant):
     if response.status_code == 200:
         result = response.json()["specifications"]
 
-
-
         return result   # TODO: map this result to attributes of the Plant class
 
 
@@ -46,11 +44,3 @@ class Plant:
         self.toxicity = ""
         self.shape_orientation = ""
 
-
-    def get_id(self): return self.id
-    def get_common_name(self): return self.common_name
-    def get_sci_name(self): return self.sci_name
-
-    def set_id(self, new_id): self.id = new_id
-    def set_common_name(self, new_common_name): self.common_name = new_common_name
-    def set_sci_name(self, new_sci_name): self.sci_name = new_sci_name

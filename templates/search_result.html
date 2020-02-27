@@ -6,12 +6,24 @@
 </head>
 <body>
 
-<h1>Search Results for "{{ search }}"</h1>
+    <h1>MN Plant Life</h1>
+    <p>Created in 2020 by Connor Dufault</p>
 
-{% set areas = results %}
-{% for area in areas %}
-    <li>{{ area.name }}</li>
-{% endfor %}
+    <label for="search">Search for a MN Scientific & Natural Area:</label>
+        <form method = "POST">
+            <input name="search" required>
+            <input type="submit">
+        </form>
+
+    <h3>Search Results for "{{ search }}":</h3>
+
+    {# display results of search in a list #}
+    {% set areas = results %}
+    {% for area in areas %}
+        <li>{{ area.name }}</li>
+    {% else %}
+        <li>No results found for "{{ search }}"</li>
+    {% endfor %}
 
 </body>
 </html>

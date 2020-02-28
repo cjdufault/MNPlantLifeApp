@@ -8,13 +8,71 @@
 
 <h1>{{ name }}</h1>
 
-{# conditional to check if area is in > 1 county, to use appropriate sing/plural #}
-{% set sna_county = county %}
-{% if " and "  in sna_county %}
-    <p>Counties: {{ sna_county }}</p>
-{% else %}
-    <p>County: {{ sna_county }}</p>
-{% endif %}
+<p>
+    {% set tags_string = tags|join(", ")|title %}
+    <i>{{ tags_string }}</i>
+</p>
+
+{# table containing info about the SNA #}
+<table style="width:100%">
+    <tr>
+        {# conditional to check if area is in > 1 county, to use appropriate sing/plural #}
+        {% set sna_county = county %}
+        {% if " and "  in sna_county %}
+            <th>Counties:</th>
+        {% else %}
+            <td>County:</td>
+        {% endif %}
+        <td>{{ sna_county }}</td>
+    </tr>
+    <tr>
+        <th>Map:</th>
+        <td><i>to be added later</i></td>
+    </tr>
+    <tr><th>Wildflowers:</th></tr>
+    <tr>
+        <td colspan="2">
+            <ul style="list-style-type:none">
+                {% for flower in wildflowers %}
+                    <small><li>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</li></small>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr><th>Grasses:</th></tr>
+    <tr>
+        <td colspan="2">
+            <ul style="list-style-type:none">
+                {% for grass in grasses %}
+                    <small><li>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</li></small>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <th>Trees/Shrubs:</th>
+    <tr>
+        <td colspan="2">
+            <ul style="list-style-type:none">
+                {% for tree in trees_shrubs %}
+                    <small><li>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</li></small>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td>{{ desc }}</td>
+    </tr>
+    <tr>
+        <th>Notes:</th>
+        <td>{{ notes }}</td>
+    </tr>
+    <tr>
+        <th>Directions:</th>
+        <td>{{ directions }}</td>
+    </tr>
+
+</table>
 
 </body>
 </html>

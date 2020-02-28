@@ -11,6 +11,7 @@ def home():
     return render_template("home.html")
 
 
+# shows SNA search results
 @app.route("/", methods=["POST"])
 def sna_search():
     search_term = request.form["search"]
@@ -22,6 +23,7 @@ def sna_search():
     return render_template("search_result.html", search=search_term, results=results)
 
 
+# page that shows info on a specified SNA
 @app.route("/sna/<sna_name>")
 def sna_page(sna_name):
     try:
@@ -31,7 +33,16 @@ def sna_page(sna_name):
 
     sna_object = dnr.sna_details_request(sna_id)
 
-    return render_template("sna_page.html", name=sna_object.name, county=sna_object.county)
+    return render_template("sna_page.html",
+                           name=sna_object.name,
+                           tags=sna_object.tags,
+                           county=sna_object.county,
+                           desc=sna_object.desc,
+                           notes=sna_object.notes,
+                           directions=sna_object.directions,
+                           wildflowers=sna_object.wildflowers,
+                           grasses=sna_object.grasses,
+                           trees_shrubs=sna_object.trees_shrubs)
 
 
 @app.route("/plant/<sci_name>")

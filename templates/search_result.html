@@ -21,7 +21,8 @@
     {# display results of search in a list #}
     {% set areas = results %}
     {% for area in areas %}
-        <li>{{ area }}</li>
+        <li>
+            <a href="/sna/{{ area }}">{{ area }}</a></li>
     {% else %}
         <li>No results found for "{{ search }}"</li>
     {% endfor %}

@@ -9,15 +9,17 @@ sna_detail_url = "http://services.dnr.state.mn.us/api/sna/detail/v1?id="
 def search(search_string):
     results = gazetteer_request(search_string)
 
-    list_of_snas = []
+    sna_dict = {}
     try:
         for result in results:
-            list_of_snas.append(SNA(result))
+            name = result["name"]
+            sna_id = str.lower(result["id"])
+            sna_dict[name] = sna_id
 
     except TypeError:
         print("No results found for " + search_string)
 
-    return list_of_snas
+    return sna_dict
 
 
 def gazetteer_request(search_string):
@@ -28,19 +30,21 @@ def gazetteer_request(search_string):
 
 
 # fills an SNA object in w/ all of the deets
-def sna_details_request(sna):
-    response = requests.get(sna_detail_url + sna.get_id()).json()
+def sna_details_request(sna_id):
+    response = requests.get(sna_detail_url + sna_id).json()
 
     if response["status"] == "SUCCESS":  # because apparently consistency is for chumps
-        result = response["result"]
+        request_result = response["result"]
 
-        sna.trees_shrubs = result["species"]["tree_shrub"]
-        sna.grasses = result["species"]["grass_sedge"]
-        sna.wildflowers = result["species"]["wildflower"]
-        sna.desc = remove_html_tags(result["description"])
-        sna.notes = remove_html_tags(result["notes"])
-        sna.tags = result["tags"]
-        sna.directions = remove_html_tags(result["parking"][0]["directions"])
+        sna = (SNA(request_result))
+
+        sna.trees_shrubs = request_result["species"]["tree_shrub"]
+        sna.grasses = request_result["species"]["grass_sedge"]
+        sna.wildflowers = request_result["species"]["wildflower"]
+        sna.desc = remove_html_tags(request_result["description"])
+        sna.notes = remove_html_tags(request_result["notes"])
+        sna.tags = request_result["tags"]
+        sna.directions = remove_html_tags(request_result["parking"][0]["directions"])
 
         return sna
 
@@ -52,14 +56,14 @@ def remove_html_tags(string):
 
 class SNA:
     def __init__(self, request_result):  # result is a json from the gazetteer api
-        self.id = str.lower(request_result["id"])  # gazetteer has this w/ SNA in caps, but details wants it lower case
+        self.id = request_result["id"]
         self.coordinates_box = request_result["bbox"]["epsg:4326"]
         self.county = request_result["county"]
         self.name = request_result["name"]
-        self.trees_shrubs = []
-        self.grasses = []
-        self.wildflowers = []
-        self.desc = ""
-        self.notes = ""
-        self.tags = []
-        self.directions = ""
+        self.trees_shrubs = request_result["species"]["tree_shrub"]
+        self.grasses = request_result["species"]["grass_sedge"]
+        self.wildflowers = request_result["species"]["wildflower"]
+        self.desc = remove_html_tags(request_result["description"])
+        self.notes = remove_html_tags(request_result["notes"])
+        self.tags = request_result["tags"]
+        self.directions = remove_html_tags(request_result["parking"][0]["directions"])

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MN Plant Life - {{ name }}</title>
+</head>
+<body>
+
+<h1>{{ name }}</h1>
+
+{# conditional to check if area is in > 1 county, to use appropriate sing/plural #}
+{% set sna_county = county %}
+{% if " and "  in sna_county %}
+    <p>Counties: {{ sna_county }}</p>
+{% else %}
+    <p>County: {{ sna_county }}</p>
+{% endif %}
+
+</body>
+</html>

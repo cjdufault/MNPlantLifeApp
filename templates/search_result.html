@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MN Plant Life--Search Results</title>
+    <title>MN Plant Life - Search Results</title>
 </head>
 <body>
 
     <h1>MN Plant Life</h1>
     <p>Created in 2020 by Connor Dufault</p>
 
+    {# post the contents of the search bar #}
     <label for="search">Search for a MN Scientific & Natural Area:</label>
         <form method = "POST">
             <input name="search" required>
@@ -20,7 +21,7 @@
     {# display results of search in a list #}
     {% set areas = results %}
     {% for area in areas %}
-        <li>{{ area.name }}</li>
+        <li>{{ area }}</li>
     {% else %}
         <li>No results found for "{{ search }}"</li>
     {% endfor %}

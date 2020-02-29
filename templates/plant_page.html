@@ -11,7 +11,9 @@
 <h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
 
 {% for image in images %}
-    <img src="{{ image }}">
+    <a href="{{ image["url"] }}">
+        <img src="{{ image["url"] }}" alt="{{ image["url"] }}" width="500">
+    </a>
 {% endfor %}
 
 </body>

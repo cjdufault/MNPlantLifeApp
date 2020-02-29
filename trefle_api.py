@@ -9,10 +9,10 @@ trefle_url = "https://trefle.io/api/species"
 def search(sci_name):
     try:
         result = species_request(sci_name)[0]
-        plant = Plant(result)
+        plant = species_details_request(result)
         return plant
     except IndexError:
-        print("No result found for " + sci_name)    # TODO: pass this to the UI in some way
+        print("No result found for " + sci_name)
 
 
 def species_request(sci_name):
@@ -24,16 +24,14 @@ def species_request(sci_name):
         return results
 
 
-def species_details_request(plant):
-    species_id = plant.get_id()
-
-    request_url = trefle_url + "/" + str(species_id) + "?token=" + token
+def species_details_request(request_result):
+    request_url = trefle_url + "/" + str(request_result["id"]) + "?token=" + token
     response = requests.get(request_url)
 
     if response.status_code == 200:
-        result = response.json()["specifications"]
-
-        return result   # TODO: map this result to attributes of the Plant class
+        result = response.json()
+        plant = Plant(result)
+        return plant
 
 
 class Plant:
@@ -41,6 +39,7 @@ class Plant:
         self.id = request_result["id"]
         self.common_name = request_result["common_name"]
         self.sci_name = request_result["scientific_name"]
-        self.toxicity = ""
-        self.shape_orientation = ""
+        self.family = request_result["family_common_name"]
+        self.toxicity = request_result["specifications"]["toxicity"]
+        self.shape_orientation = request_result["specifications"]["shape_and_orientation"]
 

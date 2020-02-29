@@ -47,7 +47,12 @@ def sna_page(sna_name):
 
 @app.route("/plant/<sci_name>")
 def plant_page(sci_name):
-    return sci_name
+    print(sci_name)
+    plant = trefle.search(sci_name)
+
+    return render_template("plant_page.html",
+                           cname=plant.common_name,
+                           sname=plant.sci_name)
 
 
 if __name__ == "__main__":

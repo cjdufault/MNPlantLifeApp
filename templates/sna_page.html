@@ -21,7 +21,7 @@
         {% if " and "  in sna_county %}
             <th>Counties:</th>
         {% else %}
-            <td>County:</td>
+            <th>County:</th>
         {% endif %}
         <td>{{ sna_county }}</td>
     </tr>
@@ -34,7 +34,11 @@
         <td colspan="2">
             <ul style="list-style-type:none">
                 {% for flower in wildflowers %}
-                    <small><li>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</li></small>
+                    <li>
+                        <a href="/plant/{{ flower["sname"] }}">
+                            <small>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</small>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </td>
@@ -44,7 +48,11 @@
         <td colspan="2">
             <ul style="list-style-type:none">
                 {% for grass in grasses %}
-                    <small><li>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</li></small>
+                    <li>
+                        <a href="/plant/{{ grass["sname"] }}">
+                            <small>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</small>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </td>
@@ -54,7 +62,11 @@
         <td colspan="2">
             <ul style="list-style-type:none">
                 {% for tree in trees_shrubs %}
-                    <small><li>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</li></small>
+                    <li>
+                        <a href="/plant/{{ tree["sname"] }}">
+                            <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small>
+                        </a>
+{#                        <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small></li>#}
                 {% endfor %}
             </ul>
         </td>

@@ -55,7 +55,8 @@ def plant_page(sci_name):
         plant = trefle.search(sci_name)
         return render_template("plant_page.html",
                                cname=plant.common_name,
-                               sname=plant.sci_name)
+                               sname=plant.sci_name,
+                               images=plant.images)
     except AttributeError:
         return f"<h1>No result found for \"{sci_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"

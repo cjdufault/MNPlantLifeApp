@@ -6,7 +6,13 @@
 </head>
 <body>
 
+<a href="/">Return home</a>
+
 <h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
+
+{% for image in images %}
+    <img src="{{ image }}">
+{% endfor %}
 
 </body>
 </html>

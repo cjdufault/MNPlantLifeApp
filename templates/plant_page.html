@@ -11,10 +11,36 @@
 <h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
 
 {% for image in images %}
-    <a href="{{ image["url"] }}">
-        <img src="{{ image["url"] }}" alt="{{ image["url"] }}" width="500">
+    {% set url = image["url"] %}
+    <a href="{{ url }}">
+        <img src="{{ url }}" alt="{{ url }}" width="500">
     </a>
 {% endfor %}
+
+<table style="width:100%">
+    <tr><th>Family:</th><td>{{ family }}</td></tr>
+    <tr><th>Toxicity:</th><td>{{ toxicity }}</td></tr>
+    <tr><th>Shape/Orientation:</th><td>{{ shape }}</td></tr>
+    <tr><th>Mature Height:</th><td>{{ mature_height_ft }} ft. ({{ mature_height_cm }} cm.)</td></tr>
+    <tr><th>Lifespan:</th><td>{{ lifespan }}</td></tr>
+    <tr><th>Growth Rate:</th><td>{{ growth_rate }}</td></tr>
+    <tr><th>Growth Period:</th><td>{{ growth_period }}</td></tr>
+    <tr><th>Growth Habit:</th><td>{{ growth_habit }}</td></tr>
+    <tr><th>Growth Form:</th><td>{{ growth_form }}</td></tr>
+    <tr><th>Duration:</th><td>{{ duration }}</td></tr>
+    <tr><th>Flower Color:</th><td>{{ flower_color }}</td></tr>
+    <tr><th>Foliage Color:</th><td>{{ foliage_color }}</td></tr>
+    <tr><th>Minimum Temperature:</th><td>{{ temp_min_f }} °F ({{ temp_min_c }} °C)</td></tr>
+    <tr><th>Root Depth Minimum:</th><td>{{ root_depth_min_in }} in. ({{ root_depth_min_cm }} cm.)</td></tr>
+    <tr><th>Minimum Annual Precipitation:</th><td>{{ precip_min_in }} in. ({{ precip_min_cm }} cm.)</td></tr>
+    <tr><th>Maximum Annual Precipitation:</th><td>{{ precip_max_in }} in. ({{ precip_max_cm }} cm.)</td></tr>
+    <tr><th>pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
+    <tr><th>Shade Tolerance:</th><td>{{ shade_tolerance }}</td></tr>
+    <tr><th>Salinity Tolerance:</th><td>{{ salinity_tolerance }}</td></tr>
+    <tr><th>Fire Tolerance:</th><td>{{ fire_tolerance }}</td></tr>
+    <tr><th>Drought Tolerance:</th><td>{{ drought_tolerance }}</td></tr>
+    <tr><th>Anaerobic Tolerance:</th><td>{{ anaerobic_tolerance }}</td></tr>
+</table>
 
 </body>
 </html>

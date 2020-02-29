@@ -1,12 +1,14 @@
 import requests
 import os
-
+import re
 
 token = os.environ.get("TREFLE_TOKEN")
 trefle_url = "https://trefle.io/api/species"
 
 
 def search(sci_name):
+    sci_name = strip_variants_and_subspecies(sci_name)
+
     try:
         result = species_request(sci_name)[0]
         plant = species_details_request(result)
@@ -32,6 +34,13 @@ def species_details_request(request_result):
         result = response.json()
         plant = Plant(result)
         return plant
+
+
+# trefle often doesn't recognize variants and subspecies, so "var. X" and "subsp. X" are stripped
+def strip_variants_and_subspecies(sci_name):
+    stripped_name = re.sub(r"var\. .*", "", sci_name)
+    stripped_name = re.sub(r"subsp\. .*", "", stripped_name)
+    return stripped_name
 
 
 class Plant:

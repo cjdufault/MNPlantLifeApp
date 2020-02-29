@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MN Plant Life - {{ cname }}</title>
+    {# if no common name is provided, put the scientific name in the header #}
+    {% if cname != None %}
+        <title>MN Plant Life - {{ cname }}</title>
+    {% else %}
+        <title>MN Plant Life - {{ sname }}</title>
+    {% endif %}
 </head>
 <body>
 
 <a href="/">Return home</a>
 
-<h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
+{# if no common name is provided, title is just the scientific name #}
+{% if cname != None %}
+    <h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
+{% else %}
+    <h1><i>{{ sname }}</i></h1>
+{% endif %}
 
+{# display all of the available images of the plant #}
 {% for image in images %}
     {% set url = image["url"] %}
     <a href="{{ url }}">
@@ -17,29 +28,75 @@
     </a>
 {% endfor %}
 
+{# table containing attributes of the plant #}
 <table style="width:100%">
-    <tr><th>Family:</th><td>{{ family }}</td></tr>
-    <tr><th>Toxicity:</th><td>{{ toxicity }}</td></tr>
-    <tr><th>Shape/Orientation:</th><td>{{ shape }}</td></tr>
-    <tr><th>Mature Height:</th><td>{{ mature_height_ft }} ft. ({{ mature_height_cm }} cm.)</td></tr>
-    <tr><th>Lifespan:</th><td>{{ lifespan }}</td></tr>
-    <tr><th>Growth Rate:</th><td>{{ growth_rate }}</td></tr>
-    <tr><th>Growth Period:</th><td>{{ growth_period }}</td></tr>
-    <tr><th>Growth Habit:</th><td>{{ growth_habit }}</td></tr>
-    <tr><th>Growth Form:</th><td>{{ growth_form }}</td></tr>
-    <tr><th>Duration:</th><td>{{ duration }}</td></tr>
-    <tr><th>Flower Color:</th><td>{{ flower_color }}</td></tr>
-    <tr><th>Foliage Color:</th><td>{{ foliage_color }}</td></tr>
-    <tr><th>Minimum Temperature:</th><td>{{ temp_min_f }} °F ({{ temp_min_c }} °C)</td></tr>
-    <tr><th>Root Depth Minimum:</th><td>{{ root_depth_min_in }} in. ({{ root_depth_min_cm }} cm.)</td></tr>
-    <tr><th>Minimum Annual Precipitation:</th><td>{{ precip_min_in }} in. ({{ precip_min_cm }} cm.)</td></tr>
-    <tr><th>Maximum Annual Precipitation:</th><td>{{ precip_max_in }} in. ({{ precip_max_cm }} cm.)</td></tr>
-    <tr><th>pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
-    <tr><th>Shade Tolerance:</th><td>{{ shade_tolerance }}</td></tr>
-    <tr><th>Salinity Tolerance:</th><td>{{ salinity_tolerance }}</td></tr>
-    <tr><th>Fire Tolerance:</th><td>{{ fire_tolerance }}</td></tr>
-    <tr><th>Drought Tolerance:</th><td>{{ drought_tolerance }}</td></tr>
-    <tr><th>Anaerobic Tolerance:</th><td>{{ anaerobic_tolerance }}</td></tr>
+    {# attributes with a value of None are not displayed (some may have the string, "None", as their value, though #}
+    {% if family != None %}
+        <tr><th>Family:</th><td>{{ family }}</td>
+    {% endif %}
+    {% if toxicity != None %}
+        <tr><th>Toxicity:</th><td>{{ toxicity }}</td></tr>
+    {% endif %}
+    {% if shape != None %}
+        <tr><th>Shape/Orientation:</th><td>{{ shape }}</td></tr>
+    {% endif %}
+    {% if mature_height_ft != None %}
+        <tr><th>Mature Height:</th><td>{{ mature_height_ft }} ft. ({{ mature_height_cm }} cm.)</td></tr>
+    {% endif %}
+    {% if lifespan != None %}
+        <tr><th>Lifespan:</th><td>{{ lifespan }}</td></tr>
+    {% endif %}
+    {% if growth_rate != None %}
+        <tr><th>Growth Rate:</th><td>{{ growth_rate }}</td></tr>
+    {% endif %}
+    {% if growth_period != None %}
+        <tr><th>Growth Period:</th><td>{{ growth_period }}</td></tr>
+    {% endif %}
+    {% if growth_habit != None %}
+        <tr><th>Growth Habit:</th><td>{{ growth_habit }}</td></tr>
+    {% endif %}
+    {% if growth_form != None %}
+        <tr><th>Growth Form:</th><td>{{ growth_form }}</td></tr>
+    {% endif %}
+    {% if duration != None %}
+        <tr><th>Duration:</th><td>{{ duration }}</td></tr>
+    {% endif %}
+    {% if flower_color != None %}
+        <tr><th>Flower Color:</th><td>{{ flower_color }}</td></tr>
+    {% endif %}
+    {% if foliage_color != None %}
+        <tr><th>Foliage Color:</th><td>{{ foliage_color }}</td></tr>
+    {% endif %}
+    {% if temp_min_f != None %}
+        <tr><th>Minimum Temperature:</th><td>{{ temp_min_f }} °F ({{ temp_min_c }} °C)</td></tr>
+    {% endif %}
+    {% if root_depth_min_in != None %}
+        <tr><th>Root Depth Minimum:</th><td>{{ root_depth_min_in }} in. ({{ root_depth_min_cm }} cm.)</td></tr>
+    {% endif %}
+    {% if precip_min_in != None %}
+        <tr><th>Minimum Annual Precipitation:</th><td>{{ precip_min_in }} in. ({{ precip_min_cm }} cm.)</td></tr>
+    {% endif %}
+    {% if precip_max_in != None %}
+        <tr><th>Maximum Annual Precipitation:</th><td>{{ precip_max_in }} in. ({{ precip_max_cm }} cm.)</td></tr>
+    {% endif %}
+    {% if ph_min != None and ph_max != None%}
+        <tr><th>pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
+    {% endif %}
+    {% if shade_tolerance != None %}
+        <tr><th>Shade Tolerance:</th><td>{{ shade_tolerance }}</td></tr>
+    {% endif %}
+    {% if salinity_tolerance != None %}
+        <tr><th>Salinity Tolerance:</th><td>{{ salinity_tolerance }}</td></tr>
+    {% endif %}
+    {% if fire_tolerance != None %}
+        <tr><th>Fire Tolerance:</th><td>{{ fire_tolerance }}</td></tr>
+    {% endif %}
+    {% if drought_tolerance != None %}
+        <tr><th>Drought Tolerance:</th><td>{{ drought_tolerance }}</td></tr>
+    {% endif %}
+    {% if anaerobic_tolerance != None %}
+        <tr><th>Anaerobic Tolerance:</th><td>{{ anaerobic_tolerance }}</td></tr>
+    {% endif %}
 </table>
 
 </body>

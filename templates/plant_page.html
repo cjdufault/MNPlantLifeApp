@@ -23,9 +23,11 @@
 {# display all of the available images of the plant #}
 {% for image in images %}
     {% set url = image["url"] %}
-    <a href="{{ url }}">
-        <img src="{{ url }}" alt="{{ url }}" width="500">
-    </a>
+    {% if ".svg" not in url %}  {# sometimes theres a random .svg that isn't a plant pic -- seems safe to exclude #}
+        <a href="{{ url }}">
+            <img src="{{ url }}" alt="{{ url }}" width="40%">
+        </a>
+    {% endif %}
 {% endfor %}
 
 {# table containing attributes of the plant #}
@@ -80,7 +82,7 @@
         <tr><th>Maximum Annual Precipitation:</th><td>{{ precip_max_in }} in. ({{ precip_max_cm }} cm.)</td></tr>
     {% endif %}
     {% if ph_min != None and ph_max != None%}
-        <tr><th>pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
+        <tr><th>Soil pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
     {% endif %}
     {% if shade_tolerance != None %}
         <tr><th>Shade Tolerance:</th><td>{{ shade_tolerance }}</td></tr>

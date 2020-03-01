@@ -16,5 +16,17 @@
         <input type="submit">
     </form>
 
+    <h3>{{ list_heading }}</h3>
+
+    {# display results of search in a list #}
+    {% set areas = results %}
+    {% for area in areas %}
+        <li>
+            <a href="/sna/{{ area }}">{{ area }}</a>
+        </li>
+    {% else %}
+        <li>No results found for "{{ search }}"</li>
+    {% endfor %}
+
 </body>
 </html>

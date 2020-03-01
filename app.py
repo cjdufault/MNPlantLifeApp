@@ -9,7 +9,12 @@ search_results = {}
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    all_sna = dnr.search("")
+
+    for sna_name in all_sna.keys():
+        search_results[sna_name] = all_sna[sna_name]
+
+    return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna)
 
 
 # shows SNA search results
@@ -21,7 +26,8 @@ def sna_search():
     for result in results.keys():
         search_results[result] = results[result]
 
-    return render_template("search_result.html", search=search_term, results=results)
+    return render_template("home.html", list_heading=f"Search Results for \"{search_term}\":",
+                           search=search_term, results=results)
 
 
 # page that shows info on a specified SNA

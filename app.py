@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 import dnr_apis as dnr
 import trefle_api as trefle
+import os
 
 app = Flask(__name__)
 search_results = {}
@@ -66,6 +67,11 @@ def plant_page(sci_name):
     except AttributeError:
         return f"<h1>No result found for \"{sci_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, "static"), "favicon.ico")
 
 
 if __name__ == "__main__":

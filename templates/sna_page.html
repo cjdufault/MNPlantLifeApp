@@ -32,59 +32,54 @@
         <td><i>to be added later</i></td>
     </tr>
     <tr><th>Wildflowers:</th></tr>
-    <tr>
-        <td colspan="2">
-            <ul style="list-style-type:none">
-                {% for flower in wildflowers %}
-                    <li>
-                    {% if flower["sname"] != "Not documented" %}
-                        <a href="/plant/{{ flower["sname"] }}">
-                            <small>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</small>
-                        </a>
-                    {% else %}
-                        <i>{{ flower["sname"] }}</i>
-                    {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </td>
-    </tr>
+    <tr><td colspan="2">
+        <ul style="list-style-type:none">
+            {% for flower in wildflowers %}
+                <li>
+                {% if flower["sname"] != "Not documented" %}
+                    <a href="/plant/{{ flower["sname"] }}">
+                        <small>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</small>
+                    </a>
+                {% else %}
+                    <i>{{ flower["sname"] }}</i>
+                {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </td></tr>
     <tr><th>Grasses:</th></tr>
-    <tr>
-        <td colspan="2">
-            <ul style="list-style-type:none">
-                {% for grass in grasses %}
-                    <li>
-                    {% if grass["sname"] != "Not documented" %}
-                        <a href="/plant/{{ grass["sname"] }}">
-                            <small>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</small>
-                        </a>
-                    {% else %}
-                        <i>{{ grass["sname"] }}</i>
-                    {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </td>
+    <tr><td colspan="2">
+        <ul style="list-style-type:none">
+            {% for grass in grasses %}
+                <li>
+                {% if grass["sname"] != "Not documented" %}
+                    <a href="/plant/{{ grass["sname"] }}">
+                        <small>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</small>
+                    </a>
+                {% else %}
+                    <i>{{ grass["sname"] }}</i>
+                {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </td>
     </tr>
-    <th>Trees/Shrubs:</th>
-    <tr>
-        <td colspan="2">
-            <ul style="list-style-type:none">
-                {% for tree in trees_shrubs %}
-                    <li>
-                    {% if tree["sname"] != "Not documented" %}
-                        <a href="/plant/{{ tree["sname"] }}">
-                            <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small>
-                        </a>
+    <tr><th>Trees/Shrubs:</th></tr>
+    <tr><td colspan="2">
+        <ul style="list-style-type:none">
+            {% for tree in trees_shrubs %}
+                <li>
+                {% if tree["sname"] != "Not documented" %}
+                    <a href="/plant/{{ tree["sname"] }}">
+                        <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small>
+                    </a>
 {#                        <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small></li>#}
-                    {% else %}
-                        <i>{{ tree["sname"] }}</i>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </td>
-    </tr>
+                {% else %}
+                    <i>{{ tree["sname"] }}</i>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </td></tr>
     <tr>
         <th>Description:</th>
         <td>{{ desc }}</td>

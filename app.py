@@ -4,15 +4,15 @@ import trefle_api as trefle
 import os
 
 app = Flask(__name__)
-search_results = {}
+sna_ids = {}    # IDs to be referenced to get details on an SNA
 
 
 @app.route("/")
 def home():
     all_sna = dnr.search("")
 
-    for sna_name in all_sna.keys():
-        search_results[sna_name] = all_sna[sna_name]
+    for sna_name in all_sna.keys():  # grab all of the IDs for each SNA
+        sna_ids[sna_name] = all_sna[sna_name]
 
     return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna)
 
@@ -23,9 +23,6 @@ def sna_search():
     search_term = request.form["search"]
     results = dnr.search(search_term)
 
-    for result in results.keys():
-        search_results[result] = results[result]
-
     return render_template("home.html", list_heading=f"Search Results for \"{search_term}\":",
                            search=search_term, results=results)
 
@@ -35,7 +32,7 @@ def sna_search():
 def sna_page(sna_name):
     try:
         try:
-            sna_id = search_results[sna_name]  # get id from existing search results
+            sna_id = sna_ids[sna_name]  # get id from existing search results
         except KeyError:
             sna_id = dnr.search(sna_name)[sna_name]  # if that fails, do a search again to get id
 

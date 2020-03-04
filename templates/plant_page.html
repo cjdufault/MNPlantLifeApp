@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% set plant = plant_object %}
+
 <head>
     <meta charset="UTF-8">
     {# if no common name is provided, put the scientific name in the header #}
-    {% if cname != None %}
-        <title>MN Plant Life - {{ cname }}</title>
+    {% if plant.common_name != None %}
+        <title>MN Plant Life - {{ plant.common_name }}</title>
     {% else %}
-        <title>MN Plant Life - {{ sname }}</title>
+        <title>MN Plant Life - {{ plant.sci_name }}</title>
     {% endif %}
 </head>
 <body>
@@ -14,14 +17,14 @@
 <a href="/">Return home</a>
 
 {# if no common name is provided, title is just the scientific name #}
-{% if cname != None %}
-    <h1>{{ cname }} (<i>{{ sname }}</i>)</h1>
+{% if plant.common_name != None %}
+    <h1>{{ plant.common_name }} (<i>{{ plant.sci_name }}</i>)</h1>
 {% else %}
-    <h1><i>{{ sname }}</i></h1>
+    <h1><i>{{ plant.common_name }}</i></h1>
 {% endif %}
 
 {# display all of the available images of the plant #}
-{% for image in images %}
+{% for image in plant.images %}
     {% set url = image["url"] %}
     {# sometimes theres a random .svg that isn't a plant pic -- seems safe to exclude, and .webm too #}
     {% if ".svg" not in url and ".webm" not in url %}
@@ -34,71 +37,71 @@
 {# table containing attributes of the plant #}
 <table style="width:100%">
     {# attributes with a value of None are not displayed (some may have the string, "None", as their value, though #}
-    {% if family != None %}
-        <tr><th>Family:</th><td>{{ family }}</td>
+    {% if plant.family != None %}
+        <tr><th>Family:</th><td>{{ plant.family }}</td>
     {% endif %}
-    {% if toxicity != None %}
-        <tr><th>Toxicity:</th><td>{{ toxicity }}</td></tr>
+    {% if plant.toxicity != None %}
+        <tr><th>Toxicity:</th><td>{{ plant.toxicity }}</td></tr>
     {% endif %}
-    {% if shape != None %}
-        <tr><th>Shape/Orientation:</th><td>{{ shape }}</td></tr>
+    {% if plant.shape_orientation != None %}
+        <tr><th>Shape/Orientation:</th><td>{{ plant.shape_orientation }}</td></tr>
     {% endif %}
-    {% if mature_height_ft != None %}
-        <tr><th>Mature Height:</th><td>{{ mature_height_ft }} ft. ({{ mature_height_cm }} cm.)</td></tr>
+    {% if plant.mature_height_ft != None %}
+        <tr><th>Mature Height:</th><td>{{ plant.mature_height_ft }} ft. ({{ plant.mature_height_cm }} cm.)</td></tr>
     {% endif %}
-    {% if lifespan != None %}
-        <tr><th>Lifespan:</th><td>{{ lifespan }}</td></tr>
+    {% if plant.lifespan != None %}
+        <tr><th>Lifespan:</th><td>{{ plant.lifespan }}</td></tr>
     {% endif %}
-    {% if growth_rate != None %}
-        <tr><th>Growth Rate:</th><td>{{ growth_rate }}</td></tr>
+    {% if plant.growth_rate != None %}
+        <tr><th>Growth Rate:</th><td>{{ plant.growth_rate }}</td></tr>
     {% endif %}
-    {% if growth_period != None %}
-        <tr><th>Growth Period:</th><td>{{ growth_period }}</td></tr>
+    {% if plant.growth_period != None %}
+        <tr><th>Growth Period:</th><td>{{ plant.growth_period }}</td></tr>
     {% endif %}
-    {% if growth_habit != None %}
-        <tr><th>Growth Habit:</th><td>{{ growth_habit }}</td></tr>
+    {% if plant.growth_habit != None %}
+        <tr><th>Growth Habit:</th><td>{{ plant.growth_habit }}</td></tr>
     {% endif %}
-    {% if growth_form != None %}
-        <tr><th>Growth Form:</th><td>{{ growth_form }}</td></tr>
+    {% if plant.growth_form != None %}
+        <tr><th>Growth Form:</th><td>{{ plant.growth_form }}</td></tr>
     {% endif %}
-    {% if duration != None %}
-        <tr><th>Duration:</th><td>{{ duration }}</td></tr>
+    {% if plant.duration != None %}
+        <tr><th>Duration:</th><td>{{ plant.duration }}</td></tr>
     {% endif %}
-    {% if flower_color != None %}
-        <tr><th>Flower Color:</th><td>{{ flower_color }}</td></tr>
+    {% if plant.flower_color != None %}
+        <tr><th>Flower Color:</th><td>{{ plant.flower_color }}</td></tr>
     {% endif %}
-    {% if foliage_color != None %}
-        <tr><th>Foliage Color:</th><td>{{ foliage_color }}</td></tr>
+    {% if plant.foliage_color != None %}
+        <tr><th>Foliage Color:</th><td>{{ plant.foliage_color }}</td></tr>
     {% endif %}
-    {% if temp_min_f != None %}
-        <tr><th>Minimum Temperature:</th><td>{{ temp_min_f }} °F ({{ temp_min_c }} °C)</td></tr>
+    {% if plant.temp_min_f != None %}
+        <tr><th>Minimum Temperature:</th><td>{{ plant.temp_min_f }} °F ({{ plant.temp_min_c }} °C)</td></tr>
     {% endif %}
-    {% if root_depth_min_in != None %}
-        <tr><th>Root Depth Minimum:</th><td>{{ root_depth_min_in }} in. ({{ root_depth_min_cm }} cm.)</td></tr>
+    {% if plant.root_depth_min_in != None %}
+        <tr><th>Root Depth Minimum:</th><td>{{ plant.root_depth_min_in }} in. ({{ plant.root_depth_min_cm }} cm.)</td></tr>
     {% endif %}
-    {% if precip_min_in != None %}
-        <tr><th>Minimum Annual Precipitation:</th><td>{{ precip_min_in }} in. ({{ precip_min_cm }} cm.)</td></tr>
+    {% if plant.precip_min_in != None %}
+        <tr><th>Minimum Annual Precipitation:</th><td>{{ plant.precip_min_in }} in. ({{ plant.precip_min_cm }} cm.)</td></tr>
     {% endif %}
-    {% if precip_max_in != None %}
-        <tr><th>Maximum Annual Precipitation:</th><td>{{ precip_max_in }} in. ({{ precip_max_cm }} cm.)</td></tr>
+    {% if plant.precip_max_in != None %}
+        <tr><th>Maximum Annual Precipitation:</th><td>{{ plant.precip_max_in }} in. ({{ plant.precip_max_cm }} cm.)</td></tr>
     {% endif %}
-    {% if ph_min != None and ph_max != None%}
-        <tr><th>Soil pH Tolerance Range:</th><td>{{ ph_min }} - {{ ph_max }}</td></tr>
+    {% if plant.ph_min != None and plant.ph_max != None%}
+        <tr><th>Soil pH Tolerance Range:</th><td>{{ plant.ph_min }} - {{ plant.ph_max }}</td></tr>
     {% endif %}
-    {% if shade_tolerance != None %}
-        <tr><th>Shade Tolerance:</th><td>{{ shade_tolerance }}</td></tr>
+    {% if plant.shade_tolerance != None %}
+        <tr><th>Shade Tolerance:</th><td>{{ plant.shade_tolerance }}</td></tr>
     {% endif %}
-    {% if salinity_tolerance != None %}
-        <tr><th>Salinity Tolerance:</th><td>{{ salinity_tolerance }}</td></tr>
+    {% if plant.salinity_tolerance != None %}
+        <tr><th>Salinity Tolerance:</th><td>{{ plant.salinity_tolerance }}</td></tr>
     {% endif %}
-    {% if fire_tolerance != None %}
-        <tr><th>Fire Tolerance:</th><td>{{ fire_tolerance }}</td></tr>
+    {% if plant.fire_tolerance != None %}
+        <tr><th>Fire Tolerance:</th><td>{{ plant.fire_tolerance }}</td></tr>
     {% endif %}
-    {% if drought_tolerance != None %}
-        <tr><th>Drought Tolerance:</th><td>{{ drought_tolerance }}</td></tr>
+    {% if plant.drought_tolerance != None %}
+        <tr><th>Drought Tolerance:</th><td>{{ plant.drought_tolerance }}</td></tr>
     {% endif %}
-    {% if anaerobic_tolerance != None %}
-        <tr><th>Anaerobic Tolerance:</th><td>{{ anaerobic_tolerance }}</td></tr>
+    {% if plant.anaerobic_tolerance != None %}
+        <tr><th>Anaerobic Tolerance:</th><td>{{ plant.anaerobic_tolerance }}</td></tr>
     {% endif %}
 </table>
 

@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% set sna = sna_object %}
+
 <head>
     <meta charset="UTF-8">
-    <title>MN Plant Life - {{ name }}</title>
+    <title>MN Plant Life - {{ sna.name }}</title>
 </head>
 <body>
 
 <a href="/">Return home</a>
 
-<h1>{{ name }}</h1>
+<h1>{{ sna.name }}</h1>
 
 <p>
-    {% set tags_string = tags|join(", ")|title %}
+    {% set tags_string = sna.tags|join(", ")|title %}
     <i>{{ tags_string }}</i>
 </p>
 
@@ -19,13 +22,12 @@
 <table style="width:100%">
     <tr>
         {# conditional to check if area is in > 1 county, to use appropriate sing/plural #}
-        {% set sna_county = county %}
-        {% if " and "  in sna_county %}
+        {% if " and "  in sna.county %}
             <th>Counties:</th>
         {% else %}
             <th>County:</th>
         {% endif %}
-        <td>{{ sna_county }}</td>
+        <td>{{ sna.county }}</td>
     </tr>
     <tr>
         <th>Map:</th>   {# TODO: add a map of the SNA using Leaflet #}
@@ -34,7 +36,7 @@
     <tr><th>Wildflowers:</th></tr>
     <tr><td colspan="2">
         <ul style="list-style-type:none">
-            {% for flower in wildflowers %}
+            {% for flower in sna.wildflowers %}
                 <li>
                 {% if flower["sname"] != "Not documented" %}
                     <a href="/plant/{{ flower["sname"] }}">
@@ -50,7 +52,7 @@
     <tr><th>Grasses:</th></tr>
     <tr><td colspan="2">
         <ul style="list-style-type:none">
-            {% for grass in grasses %}
+            {% for grass in sna.grasses %}
                 <li>
                 {% if grass["sname"] != "Not documented" %}
                     <a href="/plant/{{ grass["sname"] }}">
@@ -67,7 +69,7 @@
     <tr><th>Trees/Shrubs:</th></tr>
     <tr><td colspan="2">
         <ul style="list-style-type:none">
-            {% for tree in trees_shrubs %}
+            {% for tree in sna.trees_shrubs %}
                 <li>
                 {% if tree["sname"] != "Not documented" %}
                     <a href="/plant/{{ tree["sname"] }}">
@@ -82,15 +84,15 @@
     </td></tr>
     <tr>
         <th>Description:</th>
-        <td>{{ desc }}</td>
+        <td>{{ sna.desc }}</td>
     </tr>
     <tr>
         <th>Notes:</th>
-        <td>{{ notes }}</td>
+        <td>{{ sna.notes }}</td>
     </tr>
     <tr>
         <th>Directions:</th>
-        <td>{{ directions }}</td>
+        <td>{{ sna.directions }}</td>
     </tr>
 
 </table>

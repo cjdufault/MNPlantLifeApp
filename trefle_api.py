@@ -36,10 +36,11 @@ def species_details_request(request_result):
         return plant
 
 
-# trefle often doesn't recognize variants and subspecies, so "var. X" and "subsp. X" are stripped
+# trefle often doesn't recognize variants and subspecies, so "var. X", "subsp. X" and "sp." are stripped
 def strip_variants_and_subspecies(sci_name):
     stripped_name = re.sub(r"var\. .*", "", sci_name)
     stripped_name = re.sub(r"subsp\. .*", "", stripped_name)
+    stripped_name = re.sub(r" sp\.", "", stripped_name)
     return stripped_name
 
 

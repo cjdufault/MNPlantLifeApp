@@ -7,7 +7,7 @@ trefle_url = "https://trefle.io/api/species"
 
 
 def search(sci_name):
-    sci_name = strip_variants_and_subspecies(sci_name)
+    sci_name = strip_sci_name_irregularities(sci_name)
 
     try:
         result = species_request(sci_name)[0]
@@ -36,11 +36,16 @@ def species_details_request(request_result):
         return plant
 
 
-# trefle often doesn't recognize variants and subspecies, so "var. X", "subsp. X" and "sp." are stripped
-def strip_variants_and_subspecies(sci_name):
+# trefle often doesn't recognize varieties and subspecies, so "var. X", "subsp. X" and "sp." are stripped
+def strip_sci_name_irregularities(sci_name):
+    # varieties/subspecies
     stripped_name = re.sub(r"var\. .*", "", sci_name)
     stripped_name = re.sub(r"subsp\. .*", "", stripped_name)
+
+    # DNR uses these in some places to indicate a genus w/o a specific species
     stripped_name = re.sub(r" sp\.", "", stripped_name)
+    stripped_name = re.sub(r" spp\.", "", stripped_name)
+
     return stripped_name
 
 

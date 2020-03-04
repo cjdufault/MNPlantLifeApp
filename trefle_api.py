@@ -82,22 +82,22 @@ class Plant:
 
         # round metric values, as they are overly precise
         try:
-            self.mature_height_cm = round(request_result["specifications"]["mature_height"]["cm"], 2)
+            self.mature_height_cm = round(request_result["specifications"]["mature_height"]["cm"], 1)
         except TypeError:   # trefle doesn't have these values for some plants
             self.mature_height_cm = None
         try:
-            self.temp_min_c = round(request_result["growth"]["temperature_minimum"]["deg_c"], 2)
+            self.temp_min_c = round(request_result["growth"]["temperature_minimum"]["deg_c"], 1)
         except TypeError:
             self.temp_min_c = None
         try:
-            self.root_depth_min_cm = round(request_result["growth"]["root_depth_minimum"]["cm"], 2)
+            self.root_depth_min_cm = round(request_result["growth"]["root_depth_minimum"]["cm"], 1)
         except TypeError:
             self.root_depth_min_cm = None
         try:
-            self.precip_min_cm = round(request_result["growth"]["precipitation_minimum"]["cm"], 2)
+            self.precip_min_cm = round(request_result["growth"]["precipitation_minimum"]["cm"], 1)
         except TypeError:
             self.precip_min_cm = None
         try:
-            self.precip_max_cm = round(request_result["growth"]["precipitation_maximum"]["cm"], 2)
+            self.precip_max_cm = round(request_result["growth"]["precipitation_maximum"]["cm"], 1)
         except TypeError:
             self.precip_max_cm = None

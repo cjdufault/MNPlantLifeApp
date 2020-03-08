@@ -6,6 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <title>MN Plant Life - {{ sna.name }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""
+    />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin="">
+    </script>
 </head>
 <body>
 
@@ -30,8 +38,20 @@
         <td>{{ sna.county }}</td>
     </tr>
     <tr>
-        <th>Map:</th>   {# TODO: add a map of the SNA using Leaflet #}
-        <td><i>to be added later</i></td>
+        <th>Map:</th>
+        <td>
+            <div id="sna_map" style="width: 600px; height: 400px"></div>
+            <script>
+                var sna_map = L.map('sna_map').setView([{{ sna.parking_latitude }}, {{ sna.parking_longitude }}], 13);
+
+                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={{ mapbox_token }}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1}).addTo(sna_map);
+            </script>
+        </td>
     </tr>
     <tr><th>Wildflowers:</th></tr>
     <tr><td colspan="2">

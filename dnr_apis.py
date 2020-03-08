@@ -37,15 +37,6 @@ def sna_details_request(sna_id):
         request_result = response["result"]
 
         sna = (SNA(request_result))
-
-        sna.trees_shrubs = request_result["species"]["tree_shrub"]
-        sna.grasses = request_result["species"]["grass_sedge"]
-        sna.wildflowers = request_result["species"]["wildflower"]
-        sna.desc = remove_html_tags(request_result["description"])
-        sna.notes = remove_html_tags(request_result["notes"])
-        sna.tags = request_result["tags"]
-        sna.directions = remove_html_tags(request_result["parking"][0]["directions"])
-
         return sna
 
 
@@ -66,4 +57,6 @@ class SNA:
         self.desc = remove_html_tags(request_result["description"])
         self.notes = remove_html_tags(request_result["notes"])
         self.tags = request_result["tags"]
+        self.parking_longitude = request_result["parking"][0]["point"]["epsg:4326"][0]
+        self.parking_latitude = request_result["parking"][0]["point"]["epsg:4326"][1]
         self.directions = remove_html_tags(request_result["parking"][0]["directions"])

@@ -5,6 +5,7 @@ import os
 
 app = Flask(__name__)
 sna_ids = {}    # IDs to be referenced to get details on an SNA (sna_ids[{SNA name}] = {SNA_ID})
+mapbox_token = os.environ.get("MAPBOX_TOKEN")
 
 
 @app.route("/")
@@ -38,7 +39,7 @@ def sna_page(sna_name):
 
         sna = dnr.sna_details_request(sna_id)
 
-        return render_template("sna_page.html", sna_object=sna)
+        return render_template("sna_page.html", sna_object=sna, mapbox_token=mapbox_token)
     except KeyError:
         return f"<h1>No result found for \"{sna_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MN Plant Life</title>
+    <link rel="stylesheet" href="/static/sakura.css" type="text/css">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
     {# display results of search in a list #}
     {% set areas = results %}
     {% for area in areas %}
-        <li>
+        <li style="list-style-type:none">
             <a href="/sna/{{ area }}">{{ area }}</a>
         </li>
     {% else %}

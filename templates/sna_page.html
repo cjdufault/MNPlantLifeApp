@@ -61,8 +61,8 @@
                     [{{ sna.coordinates_box[1] }}, {{ sna.coordinates_box[0] }}],
                     [{{ sna.coordinates_box[1] }}, {{ sna.coordinates_box[2] }}],
                     [{{ sna.coordinates_box[3] }}, {{ sna.coordinates_box[2] }}],
-                    [{{ sna.coordinates_box[3] }}, {{ sna.coordinates_box[0] }}]
-                ]).addTo(sna_map);
+                    [{{ sna.coordinates_box[3] }}, {{ sna.coordinates_box[0] }}]],
+                    {color: '#487119'}).addTo(sna_map);
                 sna_bounding_box.bindPopup("{{ sna.name }}");
             </script>
         </td>

@@ -4,15 +4,8 @@ import trefle_api as trefle
 import os
 
 app = Flask(__name__)
-sna_ids = {}    # IDs to be referenced to get details on an SNA (sna_ids[{SNA name}] = {SNA_ID})
 mapbox_token = os.environ.get("MAPBOX_TOKEN")
 all_sna = dnr.search("")
-
-
-# gets the sna ids for all SNAs at startup
-def get_sna_ids():
-    for sna_name in all_sna.keys():  # grab all of the IDs for each SNA
-        sna_ids[sna_name] = all_sna[sna_name]
 
 
 @app.route("/")
@@ -35,7 +28,7 @@ def sna_search():
 def sna_page(sna_name):
     try:
         try:
-            sna_id = sna_ids[sna_name]  # get id from existing search results
+            sna_id = all_sna[sna_name]  # get id from existing search results
         except KeyError:
             sna_id = dnr.search(sna_name)[sna_name]  # if that fails, do a search again to get id
 
@@ -64,4 +57,3 @@ def favicon():
 
 if __name__ == "__main__":
     app.run()
-    get_sna_ids()

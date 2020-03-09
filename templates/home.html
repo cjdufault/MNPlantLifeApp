@@ -7,8 +7,15 @@
 </head>
 <body>
 
-    <h1>MN Plant Life</h1>
-    <p>Created in 2020 by Connor Dufault</p>
+    <table>
+        <tr>
+            <td>
+                <h1>MN Plant Life</h1>
+                <small>Created in 2020 by Connor Dufault</small>
+            </td>
+            <td rowspan="2" style="text-align: right"><img src="/static/minnesota_icon.png" alt="minnesota_icon.png"></td>
+        </tr>
+    </table>
 
     {# post the contents of the search bar #}
     <label for="search">Search for a MN Scientific & Natural Area:</label>
@@ -27,7 +34,7 @@
             <a href="/sna/{{ area }}">{{ area }}</a>
         </li>
     {% else %}
-        <li>No results found for "{{ search }}"</li>
+        No results found for "{{ search }}"
     {% endfor %}
 
 </body>

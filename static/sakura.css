@@ -137,8 +137,8 @@ textarea {
     cursor: default;
     opacity: .5; }
   .button:focus, .button:hover, button:focus, button:hover, input[type="submit"]:focus, input[type="submit"]:hover, input[type="reset"]:focus, input[type="reset"]:hover, input[type="button"]:focus, input[type="button"]:hover {
-    background-color: #982c61;
-    border-color: #982c61;
+    background-color: #2C9964;
+    border-color: #2C9964;
     color: #f9f9f9;
     outline: 0; }
 

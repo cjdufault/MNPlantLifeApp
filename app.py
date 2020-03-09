@@ -6,16 +6,18 @@ import os
 app = Flask(__name__)
 sna_ids = {}    # IDs to be referenced to get details on an SNA (sna_ids[{SNA name}] = {SNA_ID})
 mapbox_token = os.environ.get("MAPBOX_TOKEN")
+all_sna = dnr.search("")
+
+
+# gets the sna ids for all SNAs at startup
+def get_sna_ids():
+    for sna_name in all_sna.keys():  # grab all of the IDs for each SNA
+        sna_ids[sna_name] = all_sna[sna_name]
 
 
 @app.route("/")
 def home():
-    all_sna = dnr.search("")
-
-    for sna_name in all_sna.keys():  # grab all of the IDs for each SNA
-        sna_ids[sna_name] = all_sna[sna_name]
-
-    return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna)
+    return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna.keys())
 
 
 # shows SNA search results
@@ -25,7 +27,7 @@ def sna_search():
     results = dnr.search(search_term)
 
     return render_template("home.html", list_heading=f"Search Results for \"{search_term}\":",
-                           search=search_term, results=results)
+                           search=search_term, results=results.keys())
 
 
 # page that shows info on a specified SNA
@@ -62,3 +64,4 @@ def favicon():
 
 if __name__ == "__main__":
     app.run()
+    get_sna_ids()

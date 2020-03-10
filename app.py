@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 import dnr_apis as dnr
 import trefle_api as trefle
 import os
@@ -49,6 +49,11 @@ def plant_page(sci_name):
     else:
         return f"<h1>No result found for \"{sci_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 
 if __name__ == "__main__":

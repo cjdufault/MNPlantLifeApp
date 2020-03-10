@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>MN Plant Life</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='sakura.css') }}" type="text/css">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="sakura.css") }}" type="text/css">
+    <link rel="shortcut icon" href="{{ url_for("static", filename="favicon.ico") }}">
 </head>
 <body>
 
@@ -19,7 +19,8 @@
     </table>
 
     {# post the contents of the search bar #}
-    <label for="search">Search for a MN Scientific & Natural Area:</label>
+    <label for="search">Search for a MN Scientific & Natural Area:
+        <a href="/about"><small>What is a Scientific & Natural Area?</small></a></label>
     <form method = "POST">
         <input name="search" required maxlength="50">
         <input type="submit" value="Search">

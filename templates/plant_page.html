@@ -11,7 +11,8 @@
     {% else %}
         <title>MN Plant Life - {{ plant.sci_name }}</title>
     {% endif %}
-    <link rel="stylesheet" href="/static/sakura.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='sakura.css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
 
@@ -21,7 +22,7 @@
 {% if plant.common_name != None %}
     <h1>{{ plant.common_name }} (<i>{{ plant.sci_name }}</i>)</h1>
 {% else %}
-    <h1><i>{{ plant.common_name }}</i></h1>
+    <h1><i>{{ plant.sci_name }}</i></h1>
 {% endif %}
 
 {# display all of the available images of the plant #}

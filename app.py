@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template
 import dnr_apis as dnr
 import trefle_api as trefle
 import os
@@ -42,17 +42,13 @@ def sna_page(sna_name):
 
 @app.route("/plant/<sci_name>")
 def plant_page(sci_name):
-    try:
-        plant = trefle.search(sci_name)
+    plant = trefle.search(sci_name)
+
+    if plant is not None:
         return render_template("plant_page.html", plant_object=plant)
-    except AttributeError:
+    else:
         return f"<h1>No result found for \"{sci_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"
-
-
-@app.route("/favicon.ico")
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, "static"), "favicon.ico")
 
 
 if __name__ == "__main__":

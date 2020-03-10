@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template
 import dnr_apis as dnr
 import trefle_api as trefle
 import os

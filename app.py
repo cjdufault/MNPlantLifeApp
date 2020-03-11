@@ -40,9 +40,13 @@ def sna_page(sna_name):
                f"<a href=\"/\">Return home</a>"
 
 
-@app.route("/plant/<sci_name>")
-def plant_page(sci_name):
+@app.route("/plant/sname=<sci_name>&cname=<common_name>")
+def plant_page(sci_name, common_name):
     plant = trefle.search(sci_name)
+
+    if plant is None:
+        # sometimes the value for sci name is actually the common name due to data entry errors
+        plant = trefle.search(common_name)
 
     if plant is not None:
         return render_template("plant_page.html", plant_object=plant)

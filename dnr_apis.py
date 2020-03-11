@@ -6,11 +6,11 @@ sna_detail_url = "http://services.dnr.state.mn.us/api/sna/detail/v1?id="
 
 
 def sna_list_request():
-    response = requests.get(sna_list_url).json()
+    response = requests.get(sna_list_url)
 
-    if response["status"] == "SUCCESS":
+    if response.status_code == 200 and response.json()["status"] == "SUCCESS":
         sna_dict = {}
-        results = response["result"]
+        results = response.json()["result"]
 
         for result in results:
             name = result["name"]
@@ -22,10 +22,10 @@ def sna_list_request():
 
 # fills an SNA object in w/ all of the deets
 def sna_details_request(sna_id):
-    response = requests.get(sna_detail_url + sna_id).json()
+    response = requests.get(sna_detail_url + sna_id)
 
-    if response["status"] == "SUCCESS":  # because apparently consistency is for chumps
-        request_result = response["result"]
+    if response.status_code == 200 and response.json()["status"] == "SUCCESS":
+        request_result = response.json()["result"]
 
         sna = (SNA(request_result))
         return sna

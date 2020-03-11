@@ -76,7 +76,7 @@
             {% for flower in sna.wildflowers %}
                 <li>
                 {% if flower["sname"] != "Not documented" %}
-                    <a href="/plant/sname={{ flower["sname"] }}&cname={{ flower["cname"] }}">
+                    <a href="/plant?sci_name={{ flower["sname"] }}&common_name={{ flower["cname"] }}">
                         <small>{{ flower["cname"] }} (<i>{{ flower["sname"] }}</i>)</small>
                     </a>
                 {% else %}
@@ -92,7 +92,7 @@
             {% for grass in sna.grasses %}
                 <li>
                 {% if grass["sname"] != "Not documented" %}
-                    <a href="/plant/sname={{ grass["sname"] }}&cname={{ grass["cname"] }}">
+                    <a href="/plant?sci_name={{ grass["sname"] }}&common_name={{ grass["cname"] }}">
                         <small>{{ grass["cname"] }} (<i>{{ grass["sname"] }}</i>)</small>
                     </a>
                 {% else %}
@@ -109,7 +109,7 @@
             {% for tree in sna.trees_shrubs %}
                 <li>
                 {% if tree["sname"] != "Not documented" %}
-                    <a href="/plant/sname={{ tree["sname"] }}&cname={{ tree["cname"] }}">
+                    <a href="/plant?sci_name={{ tree["sname"] }}&common_name={{ tree["cname"] }}">
                         <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small>
                     </a>
 {#                        <small>{{ tree["cname"] }} (<i>{{ tree["sname"] }}</i>)</small></li>#}

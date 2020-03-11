@@ -40,11 +40,18 @@ def sna_page(sna_name):
                f"<a href=\"/\">Return home</a>"
 
 
-@app.route("/plant/sname=<sci_name>&cname=<common_name>")
-def plant_page(sci_name, common_name):
+@app.route("/plant")
+def plant_page():
+    sci_name = request.args.get("sci_name", type=str)
+    common_name = request.args.get("common_name", type=str)
+
+    if sci_name is None:
+        return f"<h1>No scientific name provided</h1>\n" \
+               f"<a href=\"/\">Return home</a>"
+
     plant = trefle.search(sci_name)
 
-    if plant is None:
+    if plant is None and common_name is not None:
         # sometimes the value for sci name is actually the common name due to data entry errors
         plant = trefle.search(common_name)
 

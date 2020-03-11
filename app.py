@@ -5,22 +5,25 @@ import os
 
 app = Flask(__name__)
 mapbox_token = os.environ.get("MAPBOX_TOKEN")
-all_sna = dnr.search("")
+
+all_sna = dnr.sna_list_request()
+all_sna_keys = list(all_sna.keys())
+all_sna_keys.sort()
 
 
 @app.route("/")
 def home():
-    return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna.keys())
+    return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna_keys)
 
 
 # shows SNA search results
 @app.route("/", methods=["POST"])
 def sna_search():
     search_term = request.form["search"]
-    results = dnr.search(search_term)
+    results = search(search_term)
 
     return render_template("home.html", list_heading=f"Search Results for \"{search_term}\":",
-                           search=search_term, results=results.keys())
+                           search=search_term, results=results)
 
 
 # page that shows info on a specified SNA
@@ -30,7 +33,13 @@ def sna_page(sna_name):
         try:
             sna_id = all_sna[sna_name]  # get id from existing search results
         except KeyError:
-            sna_id = dnr.search(sna_name)[sna_name]  # if that fails, do a search again to get id
+            # maybe they didn't input it with correct capitalization
+            formatted_name = str.title(sna_name).replace(" Sna", " SNA")
+
+            if " SNA" not in formatted_name:
+                formatted_name = formatted_name + " SNA"
+
+            sna_id = all_sna[formatted_name]
 
         sna = dnr.sna_details_request(sna_id)
 
@@ -65,6 +74,16 @@ def plant_page():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+
+def search(search_string):
+    matches = []
+
+    for sna in all_sna_keys:
+        if str.lower(search_string) in str.lower(sna):
+            matches.append(sna)
+
+    return matches
 
 
 if __name__ == "__main__":

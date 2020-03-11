@@ -1,32 +1,23 @@
 import requests
 import re
 
-gazetteer_url = "http://services.dnr.state.mn.us/api/gazetteer/v1?type=sna&name="
+sna_list_url = "http://services.dnr.state.mn.us/api/sna/list/v1/"
 sna_detail_url = "http://services.dnr.state.mn.us/api/sna/detail/v1?id="
 
 
-# searches the dnr gazetteer api for an sna matching an inputted string
-def search(search_string):
-    results = gazetteer_request(search_string)
+def sna_list_request():
+    response = requests.get(sna_list_url).json()
 
-    sna_dict = {}
-    try:
+    if response["status"] == "SUCCESS":
+        sna_dict = {}
+        results = response["result"]
+
         for result in results:
             name = result["name"]
-            sna_id = str.lower(result["id"])
+            sna_id = result["id"]
             sna_dict[name] = sna_id
 
-    except TypeError:
-        print("No results found for " + search_string)
-
-    return sna_dict
-
-
-def gazetteer_request(search_string):
-    response = requests.get(gazetteer_url + search_string).json()
-    if response["status"] == "OK":
-        results = response["results"]
-        return results
+        return sna_dict
 
 
 # fills an SNA object in w/ all of the deets

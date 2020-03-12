@@ -14,6 +14,11 @@ def sna_list_request():
 
         for result in results:
             name = result["name"]
+
+            # a couple of SNAs have spaces at the end of their names, so this cleans that up for consistency
+            if str.isspace(name[0]) or str.isspace(name[-1]):
+                name = name.strip()
+
             sna_id = result["id"]
             sna_dict[name] = sna_id
 

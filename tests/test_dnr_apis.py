@@ -9,7 +9,7 @@ def main():
     test_remove_html_tags()
     test_sna_list_request()
     test_sna_details_request()
-    print("All DNR API tests passed.")
+    print("All DNR API tests passed!")
 
 
 def test_remove_html_tags():
@@ -21,7 +21,7 @@ def test_remove_html_tags():
     actual_result = dnr.remove_html_tags(test_string)
     assert expected_result == actual_result, f"remove_html_tags() failed: \"{expected_result}\" was expected, " \
                                              f"but \"{actual_result}\" was the actual result"
-    print("remove_html_tags() test passed.")
+    print("remove_html_tags() test passed!")
 
 
 def test_sna_list_request():
@@ -32,7 +32,7 @@ def test_sna_list_request():
     all_snas = dnr.sna_list_request()
     assert all_snas is not None, "sna_list_request() failed to return a dictionary"
     assert len(all_snas) > 0, "Dictionary returned by sna_list_request() is empty"
-    print("sna_list_requests() tests passed.")
+    print("sna_list_requests() tests passed!")
 
 
 def test_sna_details_request():
@@ -46,7 +46,7 @@ def test_sna_details_request():
         sna_object = dnr.sna_details_request(all_snas[sna_name])
         assert sna_object is not None, f"sna_details_request(all_snas[{sna_name}]) failed to return an SNA object"
         assert sna_object.name is not None, f"Attributes for {sna_name} were not correctly populated"
-    print("sna_details_request() tests passed.")
+    print("sna_details_request() tests passed!")
 
 
 if __name__ == '__main__':

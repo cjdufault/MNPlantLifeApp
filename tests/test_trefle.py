@@ -24,7 +24,7 @@ def test_strip_sci_name_irregularities():
         assert actual_string == expected_string, f"strip_sci_name_irregularities({string}) failed: " \
                                                  f"\"{expected_string}\" was expected, but {actual_string} " \
                                                  f"was the actual result"
-    print("strip_sci_name_irregularities() test passed!")
+    print("\tstrip_sci_name_irregularities() test passed!")
 
 
 def test_species_request():
@@ -34,7 +34,7 @@ def test_species_request():
     result = trefle.species_request(test_species_name)
     assert result is not None, "species_request() failed to get data"
     assert len(result) > 0, "species_request returned data, but it was empty"
-    print("species_request() tests passed!")
+    print("\tspecies_request() tests passed!")
     return result
 
 
@@ -46,7 +46,7 @@ def test_species_details_request(result):
     assert plant_object is not None, "species_details_request() failed to get data"
     assert plant_object.sci_name == test_species_name, "species_details_request() failed to convert data into " \
                                                        "a Plant object"
-    print("species_details_request() tests passed!")
+    print("\tspecies_details_request() tests passed!")
     return plant_object
 
 
@@ -57,7 +57,7 @@ def test_search(expected_plant_object):
     actual_plant_object = trefle.search(test_species_name)
     assert expected_plant_object.common_name == actual_plant_object.common_name, \
         "search() failed to return the expected Plant object"
-    print("search() test passed!")
+    print("\tsearch() test passed!")
 
 
 if __name__ == '__main__':

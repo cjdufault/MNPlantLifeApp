@@ -9,6 +9,7 @@ def main():
     test_strip_sci_name_irregularities()
     result = test_species_request()
     plant_object = test_species_details_request(result[0])
+    test_search(plant_object)
     print("All Trefle API tests passed.")
 
 
@@ -54,7 +55,8 @@ def test_search(expected_plant_object):
 
     # test that search() properly strings together the two request methods to return a Plant object
     actual_plant_object = trefle.search(test_species_name)
-    assert expected_plant_object == actual_plant_object, "search() failed to return the expected Plant object"
+    assert expected_plant_object.common_name == actual_plant_object.common_name, \
+        "search() failed to return the expected Plant object"
     print("search() test passed.")
 
 

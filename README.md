@@ -1,5 +1,7 @@
 # MN Plant Life
 
+Currently hosted on [PythonAnywhere](cdufault.pythonanywhere.com)
+
 The [Minnesota Department of Natural Resources](https://www.dnr.state.mn.us/snas/what_are.html) (MnDNR)
 designates areas that contain "natural features of exceptional scientific or educational value" as Scientific &
 Natural Areas (SNAs). These areas are meant to protect and preserve undisturbed ecosystems and endangered plant and

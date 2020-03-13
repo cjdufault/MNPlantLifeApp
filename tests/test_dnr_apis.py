@@ -1,24 +1,26 @@
 import dnr_apis as dnr
 
-sna_search = dnr.search("hastings")
 
-for sna in sna_search.keys():
-    sna_id = sna_search[sna]
-    sna_object = dnr.sna_details_request(sna_id)
+# test that names and ids for all SNAs are being retrieved w/ sna_list_request()
+all_snas = dnr.sna_list_request()
+assert all_snas is not None, "sna_list_request() failed to return a dictionary"
+assert len(all_snas) > 0, "Dictionary returned by sna_list_request() is empty"
 
-    print(sna_object.id)
-    print(sna_object.name)
-    print(sna_object.county)
-    print(sna_object.coordinates_box)
-    print(sna_object.notes)
-    print(sna_object.tags)
-    print(sna_object.desc)
-    print(sna_object.directions)
 
-    for item in sna_object.trees_shrubs:
-        print(item)
-    for item in sna_object.grasses:
-        print(item)
-    for item in sna_object.wildflowers:
-        print(item)
-    print()
+for sna_name in all_snas.keys():
+    print(sna_name)
+    # test that an ID is associated with every SNA
+    assert all_snas[sna_name] is not None, f"No ID was found for {sna_name}"
+
+    # test sna_details_request()
+    sna_object = dnr.sna_details_request(all_snas[sna_name])
+    assert sna_object is not None, f"sna_details_request(all_snas[{sna_name}]) failed to return an SNA object"
+    assert sna_object.name is not None, f"Attributes for {sna_name} were not correctly populated"
+
+
+# test that html tags are correctly removed from text
+test_string = "Lorem <a href=''>ipsum</a> dolor sit amet"
+expected_result = "Lorem ipsum dolor sit amet"
+actual_result = dnr.remove_html_tags(test_string)
+assert expected_result == actual_result, f"remove_html_tags() failed. " \
+                                         f"{expected_result} was expected, but {actual_result} was the actual result"

@@ -53,6 +53,11 @@ class SNA:
         self.desc = remove_html_tags(request_result["description"])
         self.notes = remove_html_tags(request_result["notes"])
         self.tags = request_result["tags"]
-        self.parking_longitude = request_result["parking"][0]["point"]["epsg:4326"][0]
-        self.parking_latitude = request_result["parking"][0]["point"]["epsg:4326"][1]
-        self.directions = remove_html_tags(request_result["parking"][0]["directions"])
+
+        # found 1 area that has no parking info supplied,
+        # so now I check to make sure the info is there before trying to do anything with it
+        parking_info = request_result["parking"]
+        if len(parking_info) > 0:
+            self.parking_longitude = parking_info[0]["point"]["epsg:4326"][0]
+            self.parking_latitude = parking_info[0]["point"]["epsg:4326"][1]
+            self.directions = remove_html_tags(parking_info[0]["directions"])

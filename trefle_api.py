@@ -39,8 +39,8 @@ def species_details_request(request_result):
 # trefle often doesn't recognize varieties and subspecies, so "var. X", "subsp. X" and "sp." are stripped
 def strip_sci_name_irregularities(sci_name):
     # varieties/subspecies
-    stripped_name = re.sub(r"var\. .*", "", sci_name)
-    stripped_name = re.sub(r"subsp\. .*", "", stripped_name)
+    stripped_name = re.sub(r" var\. .*", "", sci_name)
+    stripped_name = re.sub(r" subsp\. .*", "", stripped_name)
 
     # DNR uses these in some places to indicate a genus w/o a specific species
     stripped_name = re.sub(r" sp\.", "", stripped_name)

@@ -1,3 +1,4 @@
+import app
 import requests
 import dnr_apis
 
@@ -8,9 +9,20 @@ all_snas = dnr_apis.sna_list_request()
 
 def main():
     print("Running tests on app.py...")
+    test_search()
     test_plant_pages()
     test_sna_pages()
     print("All tests on app.py passed!")
+
+
+def test_search():
+    print("Running test on search()...")
+
+    search_term = "Blaine"
+    expected_matches = ["Blaine Airport Rich Fen SNA", "Blaine Preserve SNA"]
+    actual_matches = app.search(search_term)
+    assert actual_matches == expected_matches, f"Search test failed: expected {expected_matches}, got {actual_matches}"
+    print("\tsearch() test passed!")
 
 
 def test_plant_pages():

@@ -1,6 +1,6 @@
 # MN Plant Life
 
-Currently hosted on [PythonAnywhere](cdufault.pythonanywhere.com)
+Currently hosted on [PythonAnywhere](https://cdufault.pythonanywhere.com)
 
 The [Minnesota Department of Natural Resources](https://www.dnr.state.mn.us/snas/what_are.html) (MnDNR)
 designates areas that contain "natural features of exceptional scientific or educational value" as Scientific &

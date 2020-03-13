@@ -8,7 +8,7 @@ assert len(all_snas) > 0, "Dictionary returned by sna_list_request() is empty"
 
 
 for sna_name in all_snas.keys():
-    print(sna_name)
+
     # test that an ID is associated with every SNA
     assert all_snas[sna_name] is not None, f"No ID was found for {sna_name}"
 
@@ -22,5 +22,7 @@ for sna_name in all_snas.keys():
 test_string = "Lorem <a href=''>ipsum</a> dolor sit amet"
 expected_result = "Lorem ipsum dolor sit amet"
 actual_result = dnr.remove_html_tags(test_string)
-assert expected_result == actual_result, f"remove_html_tags() failed. " \
-                                         f"{expected_result} was expected, but {actual_result} was the actual result"
+assert expected_result == actual_result, f"remove_html_tags() failed. \"{expected_result}\" was expected, " \
+                                         f"but \"{actual_result}\" was the actual result"
+
+print("All DNR API tests passed.")

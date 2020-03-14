@@ -13,10 +13,10 @@ by various protected animals.
 This website provides information about all of Minnesota's SNAs, and also provides detailed information about the
 plant species that are found in each SNA.
 
-[Home Page](https://i.imgur.com/uKO2DZZ.png)
+![Home Page](https://i.imgur.com/uKO2DZZ.png)
 
-[SNA Page](https://i.imgur.com/neRu1b8.png)
+![SNA Page](https://i.imgur.com/neRu1b8.png)
 
-[Plant Page 1](https://i.imgur.com/xZLP5If.png)
+![Plant Page 1](https://i.imgur.com/xZLP5If.png)
 
-[Plant Page 2](https://i.imgur.com/pIC8wme.png)
+![Plant Page 2](https://i.imgur.com/pIC8wme.png)

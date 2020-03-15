@@ -13,6 +13,10 @@ by various protected animals.
 This website provides information about all of Minnesota's SNAs, and also provides detailed information about the
 plant species that are found in each SNA.
 
+## Instructions to run:
+
+You'll need to get API keys for [Trefle](https://trefle.io) and [Mapbox](https://www.mapbox.com). Set them as environment variables with the names, "TREFLE_TOKEN" and "MAPBOX_TOKEN", respectively.
+
 ![Home Page](https://i.imgur.com/uKO2DZZ.png)
 
 ![SNA Page](https://i.imgur.com/neRu1b8.png)

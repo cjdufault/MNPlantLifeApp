@@ -6,9 +6,17 @@ import os
 app = Flask(__name__)
 mapbox_token = os.environ.get("MAPBOX_TOKEN")
 
-all_sna = dnr.sna_list_request()
-all_sna_keys = list(all_sna.keys())
-all_sna_keys.sort()
+all_sna = {}
+all_sna_keys = []
+
+
+def load_sna_list():
+    global all_sna
+    global all_sna_keys
+
+    all_sna = dnr.sna_list_request()
+    all_sna_keys = list(all_sna.keys())
+    all_sna_keys.sort()
 
 
 @app.route("/")
@@ -90,15 +98,6 @@ def search(search_string):
             matches.append(sna)
 
     return matches
-
-
-def load_sna_list():
-    global all_sna
-    global all_sna_keys
-
-    all_sna = dnr.sna_list_request()
-    all_sna_keys = list(all_sna.keys())
-    all_sna_keys.sort()
 
 
 if __name__ == "__main__":

@@ -100,5 +100,7 @@ def search(search_string):
     return matches
 
 
+load_sna_list()
+
 if __name__ == "__main__":
     app.run()

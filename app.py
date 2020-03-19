@@ -65,10 +65,11 @@ def plant_page():
 
     if plant is None and common_name is not None:
         # sometimes the value for sci name is actually the common name due to data entry errors
-        print("Retrying search with common name")
+        print("Retrying search with common name as scientific name")
         plant = trefle.search(common_name)
 
     if plant is not None:
+        print("Success! Common and scientific names were switched.")
         return render_template("plant_page.html", plant_object=plant)
     else:
         print(f"Could not find data for {sci_name}")

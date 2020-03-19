@@ -13,6 +13,9 @@ all_sna_keys.sort()
 
 @app.route("/")
 def home():
+    # so that if the dict of SNAs changes while the site is up, it will be updated when the site is accessed
+    load_sna_list()
+
     return render_template("home.html", list_heading="All MN Scientific & Natural Areas:", results=all_sna_keys)
 
 
@@ -62,11 +65,13 @@ def plant_page():
 
     if plant is None and common_name is not None:
         # sometimes the value for sci name is actually the common name due to data entry errors
+        print("Retrying search with common name")
         plant = trefle.search(common_name)
 
     if plant is not None:
         return render_template("plant_page.html", plant_object=plant)
     else:
+        print(f"Could not find data for {sci_name}")
         return f"<h1>No result found for \"{sci_name}\"</h1>\n" \
                f"<a href=\"/\">Return home</a>"
 
@@ -84,6 +89,15 @@ def search(search_string):
             matches.append(sna)
 
     return matches
+
+
+def load_sna_list():
+    global all_sna
+    global all_sna_keys
+
+    all_sna = dnr.sna_list_request()
+    all_sna_keys = list(all_sna.keys())
+    all_sna_keys.sort()
 
 
 if __name__ == "__main__":
